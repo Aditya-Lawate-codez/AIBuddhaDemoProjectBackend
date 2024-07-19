@@ -1,0 +1,1 @@
+const uri = require('./config/MongoSRV');
