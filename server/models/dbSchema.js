@@ -11,5 +11,4 @@ const taskSchema = new mongoose.Schema({
         enum:['Pending', 'Completed', "inProgress"],
     }
 })
-// default: 'Pending'
 module.exports = mongoose.model('Task',taskSchema)
