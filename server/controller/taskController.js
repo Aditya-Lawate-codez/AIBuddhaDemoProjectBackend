@@ -1,7 +1,7 @@
 const Task = require('../models/dbSchema')
 
 
-exports.createTask = async (req, res)=>{
+const createTask = async (req, res)=>{
     try{
         const task = Task(req.body);
         await task.save();
@@ -12,7 +12,7 @@ exports.createTask = async (req, res)=>{
     }
 }
 
-exports.updateTask = async (req, res)=>{
+const updateTask = async (req, res)=>{
     try{
         const {id} = (req.params);
         await Task.findByIdAndUpdate(id, req.body);
@@ -23,7 +23,7 @@ exports.updateTask = async (req, res)=>{
     }
 }
 
-exports.getTasks = async (req, res)=>{
+const getTasks = async (req, res)=>{
     try{
         const task = Task.find();
         res.json(task);
@@ -33,7 +33,7 @@ exports.getTasks = async (req, res)=>{
     }
 }
 
-exports.deleteTask = async (req, res)=>{
+const deleteTask = async (req, res)=>{
     try{
         const {id} = req.params;
         await Task.findByIdAndDelete(id, req.body);
@@ -43,3 +43,10 @@ exports.deleteTask = async (req, res)=>{
         res.status(400).json({message: err.message});
     }
 }
+
+module.exports = {
+    createTask,
+    updateTask,
+    getTasks,
+    deleteTask
+};
