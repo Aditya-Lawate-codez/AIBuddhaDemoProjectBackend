@@ -1,12 +1,13 @@
-const axios = require('axios');
-const express = require('express');
+const express=require('express')
+const connectDB = require('./server/models/db')
+const taskRoutes = require('./server/routes/taskRoutes')
+const app = express()
 
-// POST request
-const app = express();
-app.use(cors);
+connectDB();
+app.use(express.json())
+app.use('/api', taskRoutes)
 
 
-app.post('/api/createTask', (req, res) => 
-    {
-        
-    })
+app.listen('3000',()=>{
+    console.log(`Server running on port 3000`)
+});
