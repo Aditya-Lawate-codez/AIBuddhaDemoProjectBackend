@@ -1,6 +1,7 @@
-require('dotenv').config()
-// const MONGODB_URI = "mongodb+srv://adityalawate2004:qazxswedc@threads.riq9cuf.mongodb.net/?retryWrites=true&w=majority&appName=Threads"
-const MONGODB_URI = process.env.URI;
+const  path = require('path');
+require("dotenv").config({path: path.join(__dirname,'.env')});
+
+const MONGODB_URI = process.env.MONGOURI;
 module.exports ={
     MONGODB_URI
 }
