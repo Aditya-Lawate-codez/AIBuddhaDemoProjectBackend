@@ -1,14 +1,16 @@
-const Task = require('../models/dbSchema')
+const Task = require('../../config/db')
+const MESSAGES = require('../constants/Messages');
+const statusCodes = require('../constants/StatusCodes');
 
 
 const createTask = async (req, res)=>{
     try{
         const task = Task(req.body);
         await task.save();
-        res.status(201).send(task);
+        res.status(statusCodes.CREATED).send(task);
     }
     catch(err){
-        res.status(400).json({message: err.message});
+        res.status(statusCodes.BAD_REQUEST).json({message: err.message});
     }
 }
 
@@ -16,20 +18,20 @@ const updateTask = async (req, res)=>{
     try{
         const {id} = (req.params);
         await Task.findByIdAndUpdate(id, req.body);
-        res.json({message : "Task updated"});
+        res.json({message : MESSAGES.TASK_UPDATED});
     }
     catch(err){
-        res.status(400).json({message: err.message});
+        res.status(statusCodes.BAD_REQUEST).json({message: err.message});
     }
 }
 
 const getTasks = async (req, res)=>{
     try{
         const task = Task.find();
-        res.json(task);
+        res.status(statusCodes.SUCCESS).json(task);
     }
     catch(err){
-        res.status(500).json({message: err.message});
+        res.status(statusCodes.SERVER_ERROR).json({message: err.message});
     }
 }
 
@@ -37,10 +39,10 @@ const deleteTask = async (req, res)=>{
     try{
         const {id} = req.params;
         await Task.findByIdAndDelete(id, req.body);
-        res.json({message: 'Task deleted'})
+        res.json({message: MESSAGES.TASK_DELETED})
     }
     catch(err){
-        res.status(400).json({message: err.message});
+        res.status(statusCodes.BAD_REQUEST).json({message: err.message});
     }
 }
 
