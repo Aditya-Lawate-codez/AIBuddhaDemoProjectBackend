@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { MONGODB_URI } = require('../../config/MONGOURI')
+const {MONGODB_URI} = require("./MONGOURI")
 
 
 const connectDB = async () => {
